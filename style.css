@@ -1,0 +1,63 @@
+/* font-family: 'Cutive Mono', monospace;
+font-family: 'Press Start 2P', cursive; */
+
+
+canvas {
+    position: relative;
+    display: block;
+    margin: 20px;
+    transform: translate(20%);
+
+}
+
+button {
+    position: relative;
+    transform: translateX(400px);
+    margin: 2px 20px;
+    font-family: 'Cutive Mono', monospace;
+    width: 70px;
+    height: 70px;
+    border: 8px solid rgb(172, 64, 14);
+    border-radius: 50%;
+    background-color: rgb(241, 108, 20);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+button:focus {
+    outline: none;
+    
+}
+
+button:active {
+    border-color: rgb(99, 34, 5);
+    background-color: rgb(172, 83, 0);
+}
+
+button#stop {
+    background-color: rgb(221, 0, 0);
+    border-color: rgb(156, 2, 2);
+    text-transform: uppercase;
+    width: 80px;
+    height: 80px;
+    
+}
+
+button#stop:active {
+    border-color: rgb(99, 11, 5);
+    background-color: rgb(172, 0, 0);
+}
+
+div {
+    position: relative;
+    background-color: rgb(24, 76, 134);
+    height: 100px;
+    width: 500px;
+    border: 10px solid black;
+    font-family: 'Press Start 2P', cursive;
+    transform: translate(300px);
+    font-size: 16px;
+    padding: 5px;
+    color: rgb(196, 206, 253);
+}
+
