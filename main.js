@@ -63,79 +63,81 @@ let tX = 0; // przesunięcie tłoka
 
 // -------------------OBSŁUGA PRZYCISKÓW -----------------------
 
-if(U == 0) {
 
+// --- MINUS ---
     btnMinus.addEventListener('click', function() {
        
         if(U > 0) {
             U--;
             colorRed -= 10;
             colorGreen -= 10;
-            // tX -=10;
             LCDz.textContent = 'otwarcie zaworu';
             speedDown();
-            LCDppt.textContent = 'prędkość posuwu tłoka: '+ Math.round(Vt*100) ;
             
         } if(U == 0) {
             U = 0;
             poz = 0;
-            // tX = 0;
             LCDz.textContent = 'zamknięcie zaworu';
-            // stopSpeed();
-            LCDppt.textContent = 'prędkość posuwu tłoka: '+ Math.round(Vt*100) ;
         }
+        LCDppt.textContent = 'prędkość posuwu tłoka: '+ Math.round(Vt*100) ;
         LCDu.textContent = "napięcie: " + U + "V";
     })
-
+// --- PLUS ---
     btnPlus.addEventListener('click', function() {
         if(U < 10) {
             U++;
             poz = 1;
             colorRed += 10;
             colorGreen += 10;
-            // tX += 10;
             LCDz.textContent = 'otwarcie zaworu';
             speedUp();
             LCDppt.textContent = 'prędkość posuwu tłoka: '+ Math.round(Vt*100) ;
         }
         LCDu.textContent = "napięcie: " + U + "V";
     })
-    
+
+// --- stop awaryjny ---
     btnStop.addEventListener('click', function() {
         U = 0;
         poz = 0;
         speedDown();
         LCDu.textContent = "napięcie: " + U + "V";
         LCDz.textContent = 'zamknięcie zaworu';
-        LCDppt.textContent = 'prędkość posuwu tłoka: '+ Math.round(Vt*100) ;
+        LCDppt.textContent = 'prędkość posuwu tłoka: '+ Math.round(Vt*100);
 })
-}
+console.log(positionTX,startX + zaworX + pX + tlokX - tSize )
 
+// if(positionTX > 500) {
+//     console.log("true");
+//     if (positionTX >= startX + zaworX + pX + tlokX - tSize) {
+//         Vt=0;
+//         positionTX = startX + zaworX + pX + tlokX - tSize;
+//         console.log(positionTX,startX + zaworX + pX + tlokX - tSize )
+// }
+
+// }
+
+if(Vt > 0 ) {
+    console.log("true")
+}
 
 function speedUp() {
     if(U > 0){
         positionTX += 1;
-        Vt+=0.1;
-        console.log(Vt);
-        console.log(startX + zaworX + pX + tlokX - tSize, positionTX)
+        Vt+=0.1;  
+    }      
+    //     if(positionTX >= startX + zaworX + pX + tlokX - tSize) {
+    //         Vt=0;
+    //     }
+    // }console.log(positionTX,startX + zaworX + pX + tlokX - tSize )
 
-        if(positionTX >= startX + zaworX + pX + tlokX - tSize) {
-            Vt=0;
-            console.log('juz')
     
-        
-        }
-    
-    }
-        
-
 }
 
 function speedDown() {
         if(U > 0) {
             positionTX -= 1;
             Vt -=0.1;
-            console.log(Vt);
         }
         if (U == 0) {
             
@@ -145,28 +147,15 @@ function speedDown() {
                 positionTX = startX + zaworX + pX;
             }
         }
-        
-
 }
 
-// function stopSpeed() {
-//     while(U > 0) {
-//         positionTX -= 1;
-//         Vt -= 0.1;
-//          if(U < 1) {
-//             positionTX = startX + zaworX + pX;
-//             Vt = 0;
-//             console.log(Vt); 
-//         }
-//     }
-// }
 //------------------FUNKCJE-------------CANVAS------------------
 
 function background() {
     ctx.fillStyle = 'gray';
     ctx.fillRect(0, 0 ,cw, ch);
 }
-
+//-----------------------ZAWOR----------------------------------
 function zawor() {
     ctx.fillStyle = 'green';
     ctx.fillRect(startX, startY ,zaworX, zaworY);
@@ -184,10 +173,14 @@ function zawor() {
     
 }
 
+// -------------------------PRZEPLYW-----------------------------
+
 function przeplyw() {
     ctx.fillStyle = 'rgb('+colorRed+','+ colorGreen +', 255)'; //zmiana koloru przepływu w zależności od U
     ctx.fillRect(startX + zaworX, startY + zaworY/2 - pY/2 ,pX, pY);
 }
+
+//---------------------------TŁOK--------------------------------
 
 function tlok() {
     ctx.fillStyle = 'red';
@@ -196,6 +189,8 @@ function tlok() {
     ctx.fillRect(positionTX, startY - pY/2 , tSize + tX, tlokY);
     positionTX +=Vt;
 }
+
+//---- odswiezanie canvas -----
 
 function view() {
     background();

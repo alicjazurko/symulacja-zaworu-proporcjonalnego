@@ -1,12 +1,16 @@
 /* font-family: 'Cutive Mono', monospace;
 font-family: 'Press Start 2P', cursive; */
 
+body {
+    background-color: rgb(194, 194, 194);
+}
 
 canvas {
     position: relative;
     display: block;
     margin: 20px;
     transform: translate(20%);
+    border: 2px solid rgb(58, 58, 58);
 
 }
 
